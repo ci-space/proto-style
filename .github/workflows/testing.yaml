@@ -51,7 +51,7 @@ jobs:
         run: go test ./...
 
   e2e-test:
-    name: unit-test
+    name: e2e-test
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
