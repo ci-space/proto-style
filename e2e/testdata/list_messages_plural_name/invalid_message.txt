@@ -1,0 +1,2 @@
+[testdata/list_messages_plural_name/invalid.proto:9:1] ListUserRequest: must be have plural entity name. Expected name: "ListUsersRequest"
+[testdata/list_messages_plural_name/invalid.proto:11:1] ListUserResponse: must be have plural entity name. Expected name: "ListUsersResponse"

@@ -1,0 +1,1 @@
+[testdata/rpc_without_entity_name/invalid.proto:6:3] UsersService.ListUsers: The name of the RPC "ListUsers" must not contain the name of the service (User|Users)

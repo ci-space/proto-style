@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package org.users.v1;
+
+service UsersService {
+  rpc ListUsers(ListUserRequest) returns (ListUserResponse);
+}
+
+message ListUserRequest {}
+
+message ListUserResponse {}
