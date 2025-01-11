@@ -1,0 +1,6 @@
+---
+lint:
+  rules:
+    no_default: true
+    add:
+      - PROTOSTYLE_LIST_MESSAGES_RESOURCE_NAME_PLURALIZED

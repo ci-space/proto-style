@@ -16,7 +16,7 @@ func TestFix_Invalid(t *testing.T) {
 		RuleName string
 	}{
 		{
-			RuleName: "list_messages_plural_name",
+			RuleName: "list_messages_resource_name_pluralized",
 		},
 		{
 			RuleName: "rpc_without_resource_name",

@@ -1,0 +1,2 @@
+[testdata/list_messages_resource_name_pluralized/invalid.proto:9:1] ListUserRequest: must be have pluralized resource name. Expected name: "ListUsersRequest"
+[testdata/list_messages_resource_name_pluralized/invalid.proto:11:1] ListUserResponse: must be have pluralized resource name. Expected name: "ListUsersResponse"

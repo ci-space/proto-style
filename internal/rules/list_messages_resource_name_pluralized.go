@@ -26,7 +26,7 @@ func NewListMessagesPluralNameRule(fixMode bool) *ListMessagesPluralNameRule {
 }
 
 func (r ListMessagesPluralNameRule) ID() string {
-	return "PROTOSTYLE_LIST_MESSAGES_PLURAL_NAME"
+	return "PROTOSTYLE_LIST_MESSAGES_RESOURCE_NAME_PLURALIZED"
 }
 
 func (r ListMessagesPluralNameRule) Purpose() string {

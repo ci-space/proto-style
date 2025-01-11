@@ -16,7 +16,7 @@ type RCPWithoutResourceNameRule struct {
 	fixMode bool
 }
 
-type rpcWithoutEntityNameVisitor struct {
+type rpcWithoutResourceNameVisitor struct {
 	*visitor.BaseFixableVisitor
 
 	fixMode bool
@@ -48,7 +48,7 @@ func (r RCPWithoutResourceNameRule) Apply(proto *parser.Proto) ([]report.Failure
 		return nil, fmt.Errorf("failed to create base fixable visitor: %w", err)
 	}
 
-	v := &rpcWithoutEntityNameVisitor{
+	v := &rpcWithoutResourceNameVisitor{
 		BaseFixableVisitor: baseVisitor,
 		fixMode:            r.fixMode,
 	}
@@ -56,7 +56,7 @@ func (r RCPWithoutResourceNameRule) Apply(proto *parser.Proto) ([]report.Failure
 	return visitor.RunVisitor(v, proto, r.ID())
 }
 
-func (v *rpcWithoutEntityNameVisitor) VisitService(srv *parser.Service) (next bool) {
+func (v *rpcWithoutResourceNameVisitor) VisitService(srv *parser.Service) (next bool) {
 	for _, srvBody := range srv.ServiceBody {
 		srvRPC, isSrvRPC := srvBody.(*parser.RPC)
 		if !isSrvRPC {
@@ -90,7 +90,7 @@ func (v *rpcWithoutEntityNameVisitor) VisitService(srv *parser.Service) (next bo
 	return true
 }
 
-func (v *rpcWithoutEntityNameVisitor) createExpectedName(rpcName string, entName utils.ResourceName) string {
+func (v *rpcWithoutResourceNameVisitor) createExpectedName(rpcName string, entName utils.ResourceName) string {
 	expected := rpcName
 	expected = strings.ReplaceAll(expected, entName.Plural, "")
 	expected = strings.ReplaceAll(expected, entName.Singular, "")
