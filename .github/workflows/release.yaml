@@ -1,0 +1,88 @@
+name: release
+
+on:
+  release: # Docs: <https://help.github.com/en/articles/events-that-trigger-workflows#release-event-release>
+    types:
+      - released
+      - prereleased
+
+jobs:
+  release-binaries:
+    name: Release binaries
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Generate builder values
+        id: values
+        run: |
+          echo "version=$(echo ${GITHUB_REF##*/} | sed -e 's/^[vV ]*//')" >> $GITHUB_OUTPUT
+          echo "buildDate=$(echo $(date +%FT%T%z))" >> $GITHUB_OUTPUT
+
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_SIGNING_KEY }}
+          passphrase: ${{ secrets.GPG_PASS }}
+          git_user_signingkey: true
+          git_commit_gpgsign: false
+
+      - name: Compile binary files
+        uses: crazy-max/ghaction-xgo@v3
+        with:
+          xgo_version: latest
+          go_version: 1.22
+          dest: dist
+          pkg: ./cmd
+          prefix: protostyle
+          targets: windows/amd64,linux/amd64,linux/arm64,darwin/arm64,darwin/amd64
+          v: true
+          x: false
+          race: false
+          ldflags: -s -w -X main.Version=${{ steps.values.outputs.version }} -X main.BuildDate=${{ steps.values.outputs.buildDate }}
+          buildmode: default
+          trimpath: true
+
+      - name: Print compiled files
+        run: ls -la ./dist
+
+      - name: Sign and compress dist files
+        env:
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+          GPG_PASS: ${{ secrets.GPG_PASS }}
+        run: |
+          files=("protostyle-darwin-amd64" "protostyle-darwin-arm64" "protostyle-linux-amd64" "protostyle-linux-arm64" "protostyle-windows-amd64.exe")
+          
+          cp README.md LICENSE dist
+          
+          cd dist
+
+          for file in "${files[@]}"; do
+            if [ -f "$file" ]; then
+              filename=$(basename -- "$file")
+              extension="${filename##*.}"
+              newFilename="protostyle.$extension"
+              if [ "${filename}" == "${extension}" ]; then
+                extension=""
+                newFilename="protostyle"
+              fi
+
+              mv $file $newFilename
+
+              gpg --batch --detach-sign --armor "./$newFilename"
+
+              zip -r "$file.zip" "$newFilename" README.md LICENSE "$newFilename.asc"
+          
+              rm $newFilename
+              rm $newFilename.asc
+            fi
+          done
+
+      - name: Attach binary files to release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "dist/*.zip"
+          generateReleaseNotes: false
+          allowUpdates: true
