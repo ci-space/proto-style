@@ -4,6 +4,13 @@
 
 protostyle - [protolint](https://github.com/yoheimuta/protolint) plugin for lint team style
 
+## Usage
+
+Run protolint with protostyle:
+```shell
+protolint -plugin protostyle lint
+```
+
 ## Rules
 
 | Rule                                              | Fixable | Description                                                 |
