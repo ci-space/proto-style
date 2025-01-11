@@ -12,7 +12,7 @@ import (
 	"github.com/ci-space/proto-style/internal/utils"
 )
 
-type RCPWithoutEntityNameRule struct {
+type RCPWithoutResourceNameRule struct {
 	fixMode bool
 }
 
@@ -22,27 +22,27 @@ type rpcWithoutEntityNameVisitor struct {
 	fixMode bool
 }
 
-func NewRPCWithoutServiceNameRule(fixMode bool) *RCPWithoutEntityNameRule {
-	return &RCPWithoutEntityNameRule{fixMode: fixMode}
+func NewRPCWithoutServiceNameRule(fixMode bool) *RCPWithoutResourceNameRule {
+	return &RCPWithoutResourceNameRule{fixMode: fixMode}
 }
 
-func (r RCPWithoutEntityNameRule) ID() string {
-	return "PROTOSTYLE_RPC_WITHOUT_ENTITY_NAME_RULE"
+func (r RCPWithoutResourceNameRule) ID() string {
+	return "PROTOSTYLE_RPC_WITHOUT_RESOURCE_NAME_RULE"
 }
 
-func (r RCPWithoutEntityNameRule) Purpose() string {
-	return "method must not contain project/entity name"
+func (r RCPWithoutResourceNameRule) Purpose() string {
+	return "method name must not contain resource name"
 }
 
-func (r RCPWithoutEntityNameRule) IsOfficial() bool {
+func (r RCPWithoutResourceNameRule) IsOfficial() bool {
 	return true
 }
 
-func (r RCPWithoutEntityNameRule) Severity() rule.Severity {
+func (r RCPWithoutResourceNameRule) Severity() rule.Severity {
 	return rule.SeverityError
 }
 
-func (r RCPWithoutEntityNameRule) Apply(proto *parser.Proto) ([]report.Failure, error) {
+func (r RCPWithoutResourceNameRule) Apply(proto *parser.Proto) ([]report.Failure, error) {
 	baseVisitor, err := visitor.NewBaseFixableVisitor(r.ID(), r.fixMode, proto, string(r.Severity()))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create base fixable visitor: %w", err)
@@ -63,7 +63,7 @@ func (v *rpcWithoutEntityNameVisitor) VisitService(srv *parser.Service) (next bo
 			continue
 		}
 
-		entName := utils.ParseEntityNameFromServiceName(srv.ServiceName)
+		entName := utils.ParseResourceNameFromServiceName(srv.ServiceName)
 		if strings.HasSuffix(srvRPC.RPCName, entName.Singular) || strings.HasSuffix(srvRPC.RPCName, entName.Plural) {
 			expectedName := v.createExpectedName(srvRPC.RPCName, entName)
 
@@ -90,7 +90,7 @@ func (v *rpcWithoutEntityNameVisitor) VisitService(srv *parser.Service) (next bo
 	return true
 }
 
-func (v *rpcWithoutEntityNameVisitor) createExpectedName(rpcName string, entName utils.EntityName) string {
+func (v *rpcWithoutEntityNameVisitor) createExpectedName(rpcName string, entName utils.ResourceName) string {
 	expected := rpcName
 	expected = strings.ReplaceAll(expected, entName.Plural, "")
 	expected = strings.ReplaceAll(expected, entName.Singular, "")

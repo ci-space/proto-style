@@ -18,7 +18,7 @@ func TestLint_Invalid(t *testing.T) {
 			RuleName: "list_messages_plural_name",
 		},
 		{
-			RuleName: "rpc_without_entity_name",
+			RuleName: "rpc_without_resource_name",
 		},
 	}
 

@@ -1,6 +1,0 @@
----
-lint:
-  rules:
-    no_default: true
-    add:
-      - PROTOSTYLE_RPC_WITHOUT_ENTITY_NAME_RULE

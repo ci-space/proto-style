@@ -30,7 +30,7 @@ func (r ListMessagesPluralNameRule) ID() string {
 }
 
 func (r ListMessagesPluralNameRule) Purpose() string {
-	return "list request/response must have plural entity name"
+	return "list request/response must have pluralized resource name"
 }
 
 func (r ListMessagesPluralNameRule) IsOfficial() bool {
@@ -65,7 +65,7 @@ func (v *listMessagesPluralNameVisitor) VisitRPC(rpc *parser.RPC) (next bool) {
 }
 
 func (v *listMessagesPluralNameVisitor) visitRPCRequest(req *parser.RPCRequest) (next bool) {
-	entName := utils.ParseEntityNameFromListRequestName(req.MessageType)
+	entName := utils.ParseResourceNameFromListRequestName(req.MessageType)
 	if entName.Singular == "" || entName.IsPlural() {
 		return true
 	}
@@ -80,7 +80,7 @@ func (v *listMessagesPluralNameVisitor) visitRPCRequest(req *parser.RPCRequest) 
 	} else {
 		v.AddFailuref(
 			req.Meta.Pos,
-			"%s: must be have plural entity name. Expected name: %q",
+			"%s: must be have pluralized resource name. Expected name: %q",
 			req.MessageType,
 			expectedName,
 		)
@@ -90,7 +90,7 @@ func (v *listMessagesPluralNameVisitor) visitRPCRequest(req *parser.RPCRequest) 
 }
 
 func (v *listMessagesPluralNameVisitor) visitRPCResponse(resp *parser.RPCResponse) (next bool) {
-	entName := utils.ParseEntityNameFromListResponseName(resp.MessageType)
+	entName := utils.ParseResourceNameFromListResponseName(resp.MessageType)
 	if entName.Singular == "" || entName.IsPlural() {
 		return true
 	}
@@ -105,7 +105,7 @@ func (v *listMessagesPluralNameVisitor) visitRPCResponse(resp *parser.RPCRespons
 	} else {
 		v.AddFailuref(
 			resp.Meta.Pos,
-			"%s: must be have plural entity name. Expected name: %q",
+			"%s: must be have pluralized resource name. Expected name: %q",
 			resp.MessageType,
 			expectedName,
 		)
@@ -117,10 +117,10 @@ func (v *listMessagesPluralNameVisitor) visitRPCResponse(resp *parser.RPCRespons
 func (v *listMessagesPluralNameVisitor) VisitMessage(msg *parser.Message) (next bool) {
 	isReq := true
 
-	entName := utils.ParseEntityNameFromListRequestName(msg.MessageName)
+	entName := utils.ParseResourceNameFromListRequestName(msg.MessageName)
 	if entName.Singular == "" {
 		isReq = false
-		entName = utils.ParseEntityNameFromListResponseName(msg.MessageName)
+		entName = utils.ParseResourceNameFromListResponseName(msg.MessageName)
 	}
 	if entName.Singular == "" {
 		return true
@@ -142,7 +142,7 @@ func (v *listMessagesPluralNameVisitor) VisitMessage(msg *parser.Message) (next 
 		} else {
 			v.AddFailuref(
 				msg.Meta.Pos,
-				"%s: must be have plural entity name. Expected name: %q",
+				"%s: must be have pluralized resource name. Expected name: %q",
 				msg.MessageName,
 				expectedName,
 			)
