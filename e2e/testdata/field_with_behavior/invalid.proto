@@ -8,6 +8,7 @@ service UsersService {
 
 message ListUsersRequest {
   int32 page = 1;
+  int32 count = 2 [(google.api.field_behavior) = UNEXPECTED];
 }
 
 message ListUsersResponse {}

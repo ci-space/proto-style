@@ -17,6 +17,18 @@ func FieldHasOption(field *parser.Field, optName string) bool {
 	return false
 }
 
+func GetOptionFromField(field *parser.Field, optName string) (*parser.FieldOption, bool) {
+	find := fmt.Sprintf("(%s)", optName)
+
+	for _, option := range field.FieldOptions {
+		if option.OptionName == find {
+			return option, true
+		}
+	}
+
+	return nil, false
+}
+
 func RPCHasOption(rpc *parser.RPC, optName string) bool {
 	find := fmt.Sprintf("(%s)", optName)
 
