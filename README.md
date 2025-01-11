@@ -2,7 +2,7 @@
 
 [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/ci-space/protostyle/master/LICENSE)
 
-protostyle - plugin for [protolint](https://github.com/yoheimuta/protolint)
+protostyle - [protolint](https://github.com/yoheimuta/protolint) plugin for lint team style
 
 ## Rules
 
