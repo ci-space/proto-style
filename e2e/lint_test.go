@@ -15,6 +15,9 @@ func TestLint_Invalid(t *testing.T) {
 		RuleName string
 	}{
 		{
+			RuleName: "field_with_behavior",
+		},
+		{
 			RuleName: "list_messages_resource_name_pluralized",
 		},
 		{

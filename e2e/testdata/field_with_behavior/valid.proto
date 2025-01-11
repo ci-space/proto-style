@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package org.users.v1;
+
+service UsersService {
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+}
+
+message ListUsersRequest {
+  int32 page = 1 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message ListUsersResponse {}

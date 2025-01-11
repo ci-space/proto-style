@@ -1,0 +1,1 @@
+[testdata/field_with_behavior/invalid.proto:10:3] Field "page" must have option "google.api.field_behavior"
