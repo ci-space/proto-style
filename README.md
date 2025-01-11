@@ -2,11 +2,17 @@
 
 [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/ci-space/protostyle/master/LICENSE)
 
-protostyle - [protolint](https://github.com/yoheimuta/protolint) plugin for lint team style
+**protostyle** - [protolint](https://github.com/yoheimuta/protolint) plugin for lint team style
 
 ## Usage
 
-Run protolint with protostyle:
+1. Download [archive](https://github.com/ci-space/protostyle/releases/download/v0.1.0/protostyle-darwin-amd64.zip) and extract **protostyle**
+```shell
+curl -L https://github.com/ci-space/protostyle/releases/download/v0.1.0/protostyle-darwin-amd64.zip -o protostyle.zip && \
+  unzip protostyle.zip protostyle
+```
+
+2. Run **protolint** with **protostyle**:
 ```shell
 protolint -plugin protostyle lint
 ```
