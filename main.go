@@ -4,7 +4,7 @@ import (
 	"github.com/yoheimuta/protolint/linter/rule"
 	"github.com/yoheimuta/protolint/plugin"
 
-	"github.com/ci-space/proto-style/internal/rules"
+	"github.com/ci-space/protostyle/internal/rules"
 )
 
 func main() {

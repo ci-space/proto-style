@@ -1,8 +1,8 @@
-# proto-style
+# protostyle
 
-[![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/ci-space/proto-style/master/LICENSE)
+[![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/ci-space/protostyle/master/LICENSE)
 
-proto-style - plugin for [protolint](https://github.com/yoheimuta/protolint)
+protostyle - plugin for [protolint](https://github.com/yoheimuta/protolint)
 
 ## Rules
 

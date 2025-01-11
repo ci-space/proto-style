@@ -1,4 +1,4 @@
-module github.com/ci-space/proto-style
+module github.com/ci-space/protostyle
 
 go 1.21.6
 

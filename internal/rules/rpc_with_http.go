@@ -6,7 +6,7 @@ import (
 	"github.com/yoheimuta/protolint/linter/rule"
 	"github.com/yoheimuta/protolint/linter/visitor"
 
-	"github.com/ci-space/proto-style/internal/utils"
+	"github.com/ci-space/protostyle/internal/utils"
 )
 
 const optionHTTPName = "google.api.http"
