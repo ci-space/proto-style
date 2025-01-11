@@ -3,4 +3,4 @@ lint:
   rules:
     no_default: true
     add:
-      - PROTOSTYLE_LIST_MESSAGES_PLURAL_NAME_RULE
+      - PROTOSTYLE_LIST_MESSAGES_PLURAL_NAME

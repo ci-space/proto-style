@@ -3,4 +3,4 @@ lint:
   rules:
     no_default: true
     add:
-      - PROTOSTYLE_RPC_WITHOUT_RESOURCE_NAME_RULE
+      - PROTOSTYLE_RPC_WITHOUT_RESOURCE_NAME

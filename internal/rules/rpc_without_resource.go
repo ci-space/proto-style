@@ -27,7 +27,7 @@ func NewRPCWithoutServiceNameRule(fixMode bool) *RCPWithoutResourceNameRule {
 }
 
 func (r RCPWithoutResourceNameRule) ID() string {
-	return "PROTOSTYLE_RPC_WITHOUT_RESOURCE_NAME_RULE"
+	return "PROTOSTYLE_RPC_WITHOUT_RESOURCE_NAME"
 }
 
 func (r RCPWithoutResourceNameRule) Purpose() string {

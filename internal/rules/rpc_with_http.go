@@ -23,7 +23,7 @@ func NewRPCWithHTTP() *RPCWithHTTPRule {
 }
 
 func (r RPCWithHTTPRule) ID() string {
-	return "PROTOSTYLE_RPC_WITH_HTTP_RULE"
+	return "PROTOSTYLE_RPC_WITH_HTTP"
 }
 
 func (r RPCWithHTTPRule) Purpose() string {
