@@ -6,37 +6,56 @@
 
 ## Usage
 
-### Download
+### GitHub Actions
 
-#### 🐧 Linux AMD64
+Use [protolint-action](https://github.com/ci-space/protolint-action), contained protostyle
+
+```yaml
+jobs:
+  protolint:
+    name: protolint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Run linter
+        uses: ci-space/protolint-action@master
+```
+
+### Locally
+
+#### Download
+
+##### 🐧 Linux AMD64
 Download [archive](https://github.com/ci-space/protostyle/releases/download/v0.1.0/protostyle-linux-amd64.zip) and extract **protostyle**
 ```shell
 curl -L https://github.com/ci-space/protostyle/releases/download/v0.1.0/protostyle-linux-amd64.zip -o protostyle.zip && \
   unzip protostyle.zip protostyle
 ```
 
-#### 🐧 Linux ARM64
+##### 🐧 Linux ARM64
 Download [archive](https://github.com/ci-space/protostyle/releases/download/v0.1.0/protostyle-linux-arm64.zip) and extract **protostyle**
 ```shell
 curl -L https://github.com/ci-space/protostyle/releases/download/v0.1.0/protostyle-linux-arm64.zip -o protostyle.zip && \
   unzip protostyle.zip protostyle
 ```
 
-#### 🍏 Apple
+##### 🍏 Apple
 Download [archive](https://github.com/ci-space/protostyle/releases/download/v0.1.0/protostyle-darwin-amd64.zip) and extract **protostyle**
 ```shell
 curl -L https://github.com/ci-space/protostyle/releases/download/v0.1.0/protostyle-darwin-amd64.zip -o protostyle.zip && \
   unzip protostyle.zip protostyle
 ```
 
-#### 🍏 Apple M*
+##### 🍏 Apple M*
 Download [archive](https://github.com/ci-space/protostyle/releases/download/v0.1.0/protostyle-darwin-arm64.zip) and extract **protostyle**
 ```shell
 curl -L https://github.com/ci-space/protostyle/releases/download/v0.1.0/protostyle-darwin-arm64.zip -o protostyle.zip && \
   unzip protostyle.zip protostyle
 ```
 
-### Run
+#### Run
 
 Run **protolint** with **protostyle**:
 ```shell
