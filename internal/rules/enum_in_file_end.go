@@ -30,7 +30,7 @@ func (r EnumInFileEndRule) Severity() rule.Severity {
 }
 
 func (r EnumInFileEndRule) Apply(proto *parser.Proto) ([]report.Failure, error) {
-	items := []parser.Visitee{}
+	itemsCount := 0
 	enums := []*parser.Enum{}
 
 	for _, visitee := range proto.ProtoBody {
@@ -38,14 +38,14 @@ func (r EnumInFileEndRule) Apply(proto *parser.Proto) ([]report.Failure, error) 
 		case *parser.Enum:
 			enums = append(enums, item)
 		default:
-			items = append(items, item)
+			itemsCount++
 		}
 	}
 
 	failures := make([]report.Failure, 0)
 
 	for i, enum := range enums {
-		goldIndex := len(items) + i
+		goldIndex := itemsCount + i
 
 		if proto.ProtoBody[goldIndex] != enum {
 			failures = append(
