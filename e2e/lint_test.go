@@ -15,6 +15,9 @@ func TestLint_Invalid(t *testing.T) {
 		RuleName string
 	}{
 		{
+			RuleName: "enum_in_file_end",
+		},
+		{
 			RuleName: "field_with_behavior",
 		},
 		{
@@ -45,6 +48,43 @@ func TestLint_Invalid(t *testing.T) {
 			require.Error(t, err, "lint error")
 
 			assertLintErrors(t, stderr, string(invalidMessage))
+		})
+	}
+}
+
+func TestLint_Valid(t *testing.T) {
+	cases := []struct {
+		RuleName string
+	}{
+		{
+			RuleName: "enum_in_file_end",
+		},
+		{
+			RuleName: "field_with_behavior",
+		},
+		{
+			RuleName: "list_messages_resource_name_pluralized",
+		},
+		{
+			RuleName: "rpc_without_resource_name",
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.RuleName, func(t *testing.T) {
+			args := []string{
+				"-plugin",
+				"./protostyle",
+				"-config_path",
+				fmt.Sprintf("./testdata/%s/protolint.yaml", c.RuleName),
+				fmt.Sprintf("./testdata/%s/valid.proto", c.RuleName),
+			}
+
+			var stdout bytes.Buffer
+			var stderr bytes.Buffer
+
+			err := lib.Lint(args, &stdout, &stderr)
+			require.NoError(t, err)
 		})
 	}
 }

@@ -9,6 +9,7 @@ import (
 
 func main() {
 	plugin.RegisterCustomRules(
+		rules.NewEnumInFileEndRule(),
 		rules.NewFieldWithBehaviorRule(),
 		plugin.RuleGen(func(_ bool, fixMode bool) rule.Rule {
 			return rules.NewRPCWithoutServiceNameRule(fixMode)

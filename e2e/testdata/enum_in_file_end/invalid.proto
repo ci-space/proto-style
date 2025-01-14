@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package org.users.v1;
+
+service UsersService {
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+}
+
+message ListUsersRequest {
+  int32 page = 1;
+  int32 count = 2;
+}
+
+enum Status {
+  Unspecified = 0;
+  Active = 1;
+}
+
+message ListUsersResponse {}

@@ -1,0 +1,6 @@
+---
+lint:
+  rules:
+    no_default: true
+    add:
+      - PROTOSTYLE_ENUM_IN_FILE_END

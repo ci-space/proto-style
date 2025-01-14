@@ -1,0 +1,1 @@
+[testdata/enum_in_file_end/invalid.proto:14:1] Enum "Status" must be in file end
