@@ -1,0 +1,1 @@
+[testdata/comment_ends_dot/invalid.proto:10:19] Comment must ends dot

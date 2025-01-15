@@ -15,6 +15,9 @@ func TestLint_Invalid(t *testing.T) {
 		RuleName string
 	}{
 		{
+			RuleName: "comment_ends_dot",
+		},
+		{
 			RuleName: "enum_in_file_end",
 		},
 		{
@@ -56,6 +59,9 @@ func TestLint_Valid(t *testing.T) {
 	cases := []struct {
 		RuleName string
 	}{
+		{
+			RuleName: "comment_ends_dot",
+		},
 		{
 			RuleName: "enum_in_file_end",
 		},

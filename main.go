@@ -10,6 +10,9 @@ import (
 func main() {
 	plugin.RegisterCustomRules(
 		rules.NewEnumInFileEndRule(),
+		plugin.RuleGen(func(_ bool, fixMode bool) rule.Rule {
+			return rules.NewCommentEndsDotRule(fixMode)
+		}),
 		rules.NewFieldWithBehaviorRule(),
 		plugin.RuleGen(func(_ bool, fixMode bool) rule.Rule {
 			return rules.NewRPCWithoutServiceNameRule(fixMode)

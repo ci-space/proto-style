@@ -35,7 +35,7 @@ func (r RCPWithoutResourceNameRule) Purpose() string {
 }
 
 func (r RCPWithoutResourceNameRule) IsOfficial() bool {
-	return true
+	return false
 }
 
 func (r RCPWithoutResourceNameRule) Severity() rule.Severity {

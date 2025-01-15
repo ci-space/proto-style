@@ -1,0 +1,6 @@
+---
+lint:
+  rules:
+    no_default: true
+    add:
+      - PROTOSTYLE_COMMENT_ENDS_DOT
