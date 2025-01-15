@@ -65,4 +65,10 @@ func (v *commentEndsDotVisitor) VisitComment(c *parser.Comment) {
 		v.AddFailuref(c.Meta.Pos, "Comment must ends dot")
 		return
 	}
+
+	comment.Append(".")
+
+	if err := utils.ChangeComment(c, v.Fixer, comment.String()); err != nil {
+		panic(err)
+	}
 }

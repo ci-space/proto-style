@@ -71,3 +71,4 @@ protolint lint -plugin ./protostyle .
 | PROTOSTYLE_RPC_WITHOUT_RESOURCE_NAME              | ✅       | Method must not contain resource name                       |
 | PROTOSTYLE_FIELD_WITH_BEHAVIOR                    | -       | Field must have behavior option (google.api.field_behavior) |
 | PROTOSTYLE_ENUM_IN_FILE_END                       | -       | Enum must be in file end                                    |
+| PROTOSTYLE_COMMENT_ENDS_DOT                       | ✅       | The comment must end with a dot                             |

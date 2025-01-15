@@ -16,6 +16,9 @@ func TestFix_Invalid(t *testing.T) {
 		RuleName string
 	}{
 		{
+			RuleName: "comment_ends_dot",
+		},
+		{
 			RuleName: "list_messages_resource_name_pluralized",
 		},
 		{
