@@ -17,7 +17,7 @@ func assertLintErrors(t *testing.T, stderr bytes.Buffer, expectedErrors string) 
 			t,
 			stderr.String(),
 			msg,
-			fmt.Sprintf("%s\n%s", stderr.String(), msg),
+			fmt.Sprintf("got %s\n%s", stderr.String(), msg),
 		)
 	}
 }

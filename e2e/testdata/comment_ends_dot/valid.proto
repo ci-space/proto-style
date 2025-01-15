@@ -4,11 +4,23 @@ package org.users.v1;
 
 service UsersService {
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc ListPermissions(ListPermissionsRequest) returns (ListPermissionsResponse);
 }
 
+// Request for list users.
 message ListUsersRequest {
   int32 page = 1; // number of page.
-  int32 count = 2;
+  int32 count = 2; /* count of items. */
 }
 
+/* Response of list users request. */
 message ListUsersResponse {}
+
+// Request for list permissions.
+message ListPermissionsRequest {
+  int32 page = 1; // number of page.
+  int32 count = 2; /* count of items. */
+}
+
+/* Response of list permissions request. */
+message ListPermissionsResponse {}

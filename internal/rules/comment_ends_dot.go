@@ -68,7 +68,7 @@ func (v *commentEndsDotVisitor) VisitComment(c *parser.Comment) {
 
 	comment.Append(".")
 
-	if err := utils.ChangeComment(c, v.Fixer, comment.String()); err != nil {
+	if err := utils.ChangeComment(c, v.Fixer, comment); err != nil {
 		panic(err)
 	}
 }

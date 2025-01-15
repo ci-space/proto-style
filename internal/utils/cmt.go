@@ -26,31 +26,50 @@ func UnwrapComment(raw string) *Comment {
 
 		comment.Message = strings.TrimPrefix(comment.Message, "/*")
 		comment.Message = strings.TrimSuffix(comment.Message, "*/")
-		comment.Message = strings.Trim(comment.Message, " ")
-	} else {
-		comment.Suffix = "//"
+	} else if strings.HasPrefix(raw, "//") {
+		comment.Prefix = "//"
 		comment.Message = strings.TrimPrefix(comment.Message, "//")
 	}
+
+	comment.Message = strings.Trim(comment.Message, " ")
 
 	return comment
 }
 
 func (c *Comment) String() string {
-	return fmt.Sprintf("%s%s%s", c.Suffix, c.Message, c.Prefix)
+	if c.Prefix != "" {
+		if c.Suffix != "" {
+			return fmt.Sprintf("%s %s %s", c.Prefix, c.Message, c.Suffix)
+		}
+
+		return fmt.Sprintf("%s %s", c.Prefix, c.Message)
+	}
+
+	return c.Message
 }
 
 func (c *Comment) Append(ch string) {
 	c.Message += ch
 }
 
-func ChangeComment(cmt *parser.Comment, fix fixer.Fixer, newComment string) error {
-	pos := cmt.Meta.Pos
+func (c *Comment) HasSuffix() bool {
+	return c.Suffix != ""
+}
 
-	return fix.SearchAndReplace(pos, func(lex *lexer.Lexer) fixer.TextEdit {
+func ChangeComment(cmt *parser.Comment, fix fixer.Fixer, newComment *Comment) error {
+	start := cmt.Meta.Pos
+
+	newCmt := newComment.String()
+	if cmt.Meta.Pos.Column <= 1 && !newComment.HasSuffix() {
+		start.Offset--
+		newCmt = "/ " + newComment.Message + "\n"
+	}
+
+	return fix.SearchAndReplace(start, func(lex *lexer.Lexer) fixer.TextEdit {
 		return fixer.TextEdit{
 			Pos:     lex.Pos.Offset,
 			End:     lex.Pos.Offset + len(cmt.Raw) - 1,
-			NewText: []byte(newComment),
+			NewText: []byte(newCmt),
 		}
 	})
 }
